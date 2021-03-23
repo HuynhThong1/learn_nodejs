@@ -1,9 +1,17 @@
-// const Product = require('../models/Product')
+const Product = require('../models/Product')
+
+const {multipleMongooseToObject} = require('../../util/mongoose')
 
 class SiteController {
   // [GET] /views
-  index (req, res) {
-    res.render('news')
+  index (req, res, next) {
+    Product.find({})
+      .then(products => {
+        res.render('home', {
+          products: multipleMongooseToObject(products)
+        })
+      })
+      .catch(next)
   }
 
   search (req, res) {
