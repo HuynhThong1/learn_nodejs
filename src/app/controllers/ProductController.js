@@ -44,6 +44,13 @@ class ProductController {
            .then(() => res.redirect('/me/stored/products'))
            .catch(next)
   }
+
+  //[DELETE] /products/:id
+  delete (req, res, next) {
+    Product.deleteOne({ _id: req.params.id})
+           .then(() => res.redirect('back'))
+           .catch(next)
+  }
 }
 
 // GET: send request to server and send back to client,
